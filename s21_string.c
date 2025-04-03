@@ -234,81 +234,60 @@ char *s21_strncat(char *dest, const char *src, size_t n) {
 
 
 int main(){
-    char dest[20] = "Hello";
-    char src[] = "world!";
-    size_t n = 3;
-    s21_strncat(dest, src, n);
-    printf("s21_strcat: %s\n", dest);
-
     char *str="sjhooo";
-    char ch='o';
-    int ch1='y';
-    char*str1="jo";
-
-    char *result= s21_strrchr(str, ch);
-    printf("s21_strrchr: %s\n", result);
-
     s21_size_t size =  s21_strlen(str);
     printf("s21_strlen: %llu\n", size);
-
-    char *result1= s21_strchr(str, ch);
-    printf("s21_strchr: %d\n", result1 - str);
-
-    char *result2= s21_strstr(str, str1);
-    printf("s21_strstr: %s\n", result2);
-
-    char *result3= s21_strpbrk(str, str1);
-    printf("s21_strpbrk: %s\n", result3);
-
-    char *result4= s21_memchr(str, ch1,20);
-    printf("s21_memchr: %s", result4);
-
-    char string1[] = "!!!!!!!qwerty......rewq?&?///$|tewq[]{}>?<";
-  char string2[] = "/?|., ^;:!~<>[]}{()#@&$*_+=";
-  char *result2 = s21_strtok(string1, string2);
-  while (result2 != s21_NULL) {
-    printf("s21_strtok: %s\n", result2);
-    result2 = s21_strtok(s21_NULL, string2);
-  }
-    char str1[] = "Hello, world!";
-    char str2[] = "Hello, World!";
-    char str3[] = "Hello, world!";
-
-    int result1 = s21_memcmp(str1, str2, my_strlen(str1));
-    printf("memcmp(str1, str2): %d\n", result1);
-
-    int result2 = s21_memcmp(str1, str3, my_strlen(str1));
-    printf("memcmp(str1, str3): %d\n", result2);
-
-    int result3 = s21_memcmp(str1, str2, 5);
-    printf("memcmp(str1, str2, 5): %d\n", result3);
-
-    char empty1[] = "";
-    char empty2[] = "";
-    int result4 = s21_memcmp(empty1, empty2, 1);
-    printf("memcmp(empty1, empty2): %d\n", result4);
-
-    const char str1[] = "hi hello";
-    const char str2[] = "low";
-
-    size_t index = s21_strcspn(str1, str2);
-
-    printf(": %zu\n", index);
-
-    char src[] = "asdfghj;lkjh sdthj!";
-    char dest[100];
-    char buffer[100];
-    s21_memcpy(dest, src, 18);
-    printf("s21_memcpy: %s\n", dest); 
-    s21_memset(buffer, 'K', 18);
-    buffer[100] = '\0';
-    printf("s21_memset: %s\n", buffer); 
-    s21_strncpy(dest, src, 10);
-    dest[100] = '\0';
-    printf("s21_strncpy: %s\n", dest); 
-
-
-
+    char *str1="sjhOOO";
+    char *result = to_upper(str1);
+    printf("%s", result);
+    free(result);
     return 0;
-    
+}
+
+// функции допы
+// верхний регистр 65-90
+// разница 32
+// нижний регистр 97-122
+
+void *to_upper(const char *str){                                                           
+    char *new_str = (char *)malloc(s21_strlen(str) + 1);
+    if (new_str == NULL) {
+        return NULL;
+    }
+
+    for(int i=0; i<=s21_strlen(str); i++){
+        if(str[i]>=97 && str[i]<=122){
+            new_str[i]=str[i]-32;
+        } else {
+            new_str[i]=str[i];
+        }
+    }
+    new_str[s21_strlen(str) + 1]='\0';
+    return (new_str);
+}
+
+                                                           
+void *to_lower(const char *str){                                              
+    char *new_str = (char *)malloc(s21_strlen(str) + 1);
+    if (new_str == NULL) {
+        return NULL; 
+    }
+    for(int i=0; i<=s21_strlen(str); i++){
+        if(str[i]>=65 && str[i]<=90){
+            new_str[i]=str[i]+32;
+        } else {
+            new_str[i]=str[i];
+        }
+    }
+    new_str[s21_strlen(str) + 1]='\0';
+    return (new_str);
+}
+
+
+void *insert(const char *src, const char *str, size_t start_index){
+
+}
+
+void *trim(const char *src, const char *trim_chars){
+
 }
