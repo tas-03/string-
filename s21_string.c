@@ -234,13 +234,21 @@ char *s21_strncat(char *dest, const char *src, size_t n) {
 
 
 int main(){
-    char *str="sjhooo";
+    char *str="Hello Worldo ";
     s21_size_t size =  s21_strlen(str);
     printf("s21_strlen: %llu\n", size);
+    
     char *str1="sjhOOO";
+    printf("s21_strlen: %llu\n", s21_strlen(str1));
     char *result = to_upper(str1);
-    printf("%s", result);
+    char *result2 = insert(str, str1, 3);
+    printf("insert %s\n", result2);
+    printf("to_upper %s\n", result);
+    char* rr="o ";
+    char *result3=trim(str,rr);
+    printf("trim %s\n", result3);
     free(result);
+    free(result2);
     return 0;
 }
 
@@ -249,45 +257,112 @@ int main(){
 // разница 32
 // нижний регистр 97-122
 
-void *to_upper(const char *str){                                                           
+void *to_upper(const char *str){
+    int flag=0;                                                           
     char *new_str = (char *)malloc(s21_strlen(str) + 1);
     if (new_str == NULL) {
-        return NULL;
+        flag=1; 
     }
-
-    for(int i=0; i<=s21_strlen(str); i++){
-        if(str[i]>=97 && str[i]<=122){
-            new_str[i]=str[i]-32;
-        } else {
-            new_str[i]=str[i];
+    if(!flag){
+        for(int i=0; i<=s21_strlen(str); i++){
+            if(str[i]>=97 && str[i]<=122){
+                new_str[i]=str[i]-32;
+            } else {
+                new_str[i]=str[i];
+            }
         }
+        new_str[s21_strlen(str) + 1]='\0';
     }
-    new_str[s21_strlen(str) + 1]='\0';
-    return (new_str);
+    
+    return (void *)new_str;
 }
 
                                                            
-void *to_lower(const char *str){                                              
+void *to_lower(const char *str){              
+    int flag=0;                                
     char *new_str = (char *)malloc(s21_strlen(str) + 1);
     if (new_str == NULL) {
-        return NULL; 
+       flag=1;
     }
-    for(int i=0; i<=s21_strlen(str); i++){
-        if(str[i]>=65 && str[i]<=90){
-            new_str[i]=str[i]+32;
-        } else {
-            new_str[i]=str[i];
+    if(!flag){
+        for(int i=0; i<=s21_strlen(str); i++){
+            if(str[i]>=65 && str[i]<=90){
+                new_str[i]=str[i]+32;
+            } else {
+                new_str[i]=str[i];
+            }
         }
+        new_str[s21_strlen(str) + 1]='\0';
     }
-    new_str[s21_strlen(str) + 1]='\0';
-    return (new_str);
+    return (void *) new_str;
 }
 
 
 void *insert(const char *src, const char *str, size_t start_index){
-
+    int flag=0;
+    char *new_str = (char *)malloc(s21_strlen(str) + s21_strlen(src) + 1);
+    if (new_str == NULL) {
+        flag=1;
+    } 
+    int k=0, i;
+    if (!flag){
+        s21_memcpy(new_str, src, start_index);
+    for(i = start_index; i<s21_strlen(str) + start_index; i++, k++){
+        new_str[i] = str[k];
+    }
+    int j= start_index,o=0;
+    for ( i = start_index+s21_strlen(str); j<=s21_strlen(src); i++, j++){
+        new_str[i] = src[j];
+    }
+    new_str [i] = '\0';
+    }
+    return (void *) new_str;
 }
 
 void *trim(const char *src, const char *trim_chars){
+    int flag=0;
+    char *new_str = (char *)malloc(s21_strlen(src)+1);
+    if (new_str == NULL) {
+        flag =1;
+    } 
+    if (!flag){
+        if (deletion_first(src,trim_chars,new_str)==0){
+            copy(src, 0, new_str);
+        }else{
+            deletion_last(src,trim_chars,new_str);
+        }
+    }
+    return (void *) new_str;
+}
 
+
+int deletion_first(const char *src, const char *trim_chars, char* new_str){
+    int flag=0;
+for (int i=0; i<=s21_strlen(src); i++){
+    for (int j=0;j<=s21_strlen(trim_chars); j++){
+        if(trim_chars[j]==src[i]&&!flag){
+            copy(src,i,new_str);
+            flag=1;
+            }      
+        }
+    }
+return flag;
+}
+void deletion_last(const char *src, const char *trim_chars, char* new_str){
+    int flag=0;
+    for (int i=s21_strlen(src); i>=0; i--){
+        for (int j=0;j<s21_strlen(trim_chars); j++){
+            if(new_str[i]==trim_chars[j]&&flag==0){
+                new_str[i]='\0';
+                flag=1;
+                }      
+            }
+        }
+}
+
+void copy(const char *src, int i, char* new_str){
+    int k=0;
+    for(int j=i+1; j<=s21_strlen(src); j++, k++){
+        new_str[k] = src[j];
+    }
 }

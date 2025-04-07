@@ -26,5 +26,9 @@ void *to_lower(const char *str);
 void *insert(const char *src, const char *str, size_t start_index);
 void *trim(const char *src, const char *trim_chars);
 
+int deletion_first(const char *src, const char *trim_chars, char* new_str);
+void deletion_last(const char *src, const char *trim_chars, char* new_str);
+void copy(const char *src, int i, char* new_str);
+
 
 #endif 
