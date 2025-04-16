@@ -1,6 +1,7 @@
 #ifndef S21_SSCANF_H
 #define S21_SSCANF_H
 
+
 // добавить стринг.х
 
 // в стринг.х
