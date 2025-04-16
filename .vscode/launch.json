@@ -2,14 +2,52 @@
   "version": "0.2.0",
   "configurations": [
     {
+<<<<<<< HEAD
+=======
+      "name": "(gdb) Запуск канала",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "Введите имя программы, например: ${workspaceFolder}/a.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": false,
+      "pipeTransport": {
+        "debuggerPath": "/usr/bin/gdb",
+        "pipeProgram": "<Полный путь к программе канала, например: plink.exe>",
+        "pipeArgs": [],
+        "pipeCwd": ""
+      },
+      "MIMode": "gdb",
+      "setupCommands": [
+          {
+              "description": "Включить автоматическое форматирование для gdb",
+              "text": "-enable-pretty-printing",
+              "ignoreFailures": true
+          },
+          {
+              "description": "Задать для варианта приложения дизассемблирования значение Intel",
+              "text": "-gdb-set disassembly-flavor intel",
+              "ignoreFailures": true
+          }
+      ]
+    },
+    {
+>>>>>>> 6d1bfbb05516b400aae277550edc80341e64cbdf
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
+<<<<<<< HEAD
       "cwd": "c:/Users/welikolepie/Desktop/с/string+",
       "program": "c:/Users/welikolepie/Desktop/с/string+/build/Debug/outDebug",
+=======
+      "cwd": "c:/Users/welikolepie/Desktop/1",
+      "program": "c:/Users/welikolepie/Desktop/1/build/Debug/outDebug",
+>>>>>>> 6d1bfbb05516b400aae277550edc80341e64cbdf
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
